@@ -7,12 +7,14 @@ namespace eShopSolution.Data.Entities
 {
     public class Category
     {
-        private int Id { set; get; }
-        private int SortOrder { set; get; }
-        private Boolean IsShowOnHome { set; get; }
-        private int? ParentId { set; get; }
-        private Status Status { set; get; }
+        public int Id { set; get; }
+        public int SortOrder { set; get; }
+        public Boolean IsShowOnHome { set; get; }
+        public int? ParentId { set; get; }
+        public Status Status { set; get; }
+        public List<ProductInCategory> ProductInCategories { get; set; }
 
+        public List<CategoryTranslation> CategoryTranslations { get; set; }
 
     }
 }

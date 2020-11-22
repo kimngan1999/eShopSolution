@@ -1,18 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace eShopSolution.Data.Entities
 {
     public class Product
     {
-        private int Id { set; get; }
-        private decimal Price { set; get; }
-        private decimal OriginalPrice { set; get; }
-        private int Stock { set; get; }
-        private int ViewCount { set; get; }
-        private DateTime DateCreated { set; get; }
-        private String SeoAlias { set; get; }
+        public int Id { set; get; }
+        public decimal Price { set; get; }
+        public decimal OriginalPrice { set; get; }
+        public int Stock { set; get; }
+        public int ViewCount { set; get; }
+        public DateTime DateCreated { set; get; }
+        public String SeoAlias { set; get; }
 
+        public List<ProductInCategory> ProductInCategories { get; set; }
+        public List<OrderDetail> OrderDetails { get; set; }
+
+        public List<Cart> Carts { get; set; }
+
+        public List<ProductTranslation> ProductTranslations { get; set; }
+
+        public List<ProductImage> ProductImages { get; set; }
     }
 }
