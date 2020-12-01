@@ -13,10 +13,10 @@ namespace eShopSolution.Data.Extensions
         public static void Seed(this ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<AppConfig>().HasData(
-               new AppConfig() { Key = "HomeTitle", Value = "This is home page of eShopSolution" },
-               new AppConfig() { Key = "HomeKeyword", Value = "This is keyword of eShopSolution" },
-               new AppConfig() { Key = "HomeDescription", Value = "This is description of eShopSolution" }
-               );
+              new AppConfig() { Key = "HomeTitle", Value = "This is home page of eShopSolution" },
+              new AppConfig() { Key = "HomeKeyword", Value = "This is keyword of eShopSolution" },
+              new AppConfig() { Key = "HomeDescription", Value = "This is description of eShopSolution" }
+              );
             modelBuilder.Entity<Language>().HasData(
                 new Language() { Id = "vi", Name = "Tiếng Việt", IsDefault = true },
                 new Language() { Id = "en", Name = "English", IsDefault = false });
@@ -59,8 +59,8 @@ namespace eShopSolution.Data.Extensions
             modelBuilder.Entity<ProductTranslation>().HasData(
                  new ProductTranslation()
                  {
-                     Id = 1,
-                     ProductId = 1,
+                     Id = 5,
+                     ProductId = 2,
                      Name = "Áo sơ mi nam trắng Việt Tiến",
                      LanguageId = "vi",
                      SeoAlias = "ao-so-mi-nam-trang-viet-tien",
@@ -71,8 +71,8 @@ namespace eShopSolution.Data.Extensions
                  },
                     new ProductTranslation()
                     {
-                        Id = 2,
-                        ProductId = 1,
+                        Id = 6,
+                        ProductId = 2,
                         Name = "Viet Tien Men T-Shirt",
                         LanguageId = "en",
                         SeoAlias = "viet-tien-men-t-shirt",
@@ -84,7 +84,6 @@ namespace eShopSolution.Data.Extensions
             modelBuilder.Entity<ProductInCategory>().HasData(
                 new ProductInCategory() { ProductId = 1, CategoryId = 1 }
                 );
-
             // any guid
             var roleId = new Guid("96C677C7-3E31-45DE-815C-8E743F8DA4D7");
             var adminId = new Guid("64DFF9D4-F8D5-4CEF-9D61-5D6B6CFCB5D6");

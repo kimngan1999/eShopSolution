@@ -9,8 +9,10 @@ using System.Threading.Tasks;
 
 namespace eShopSolution.Application.catalog.Products
 {
-     public interface IPucblicProductService
+     public interface IPublicProductService
     {
         Task<PagedResult<ProductViewModel>> GetAllByCategoryId(GetPublicProductPagingRequest request);
+
+        Task<List<ProductViewModel>> GetAll();
     } 
 }

@@ -12,7 +12,7 @@ using eShopSolution.ViewModels.Catalog;
 
 namespace eShopSolution.Application.catalog.Products
 {
-    public class PublicProductService : IPucblicProductService
+    public class PublicProductService : IPublicProductService
     {
         public int CategoryId { get; set; }
 
@@ -72,6 +72,36 @@ namespace eShopSolution.Application.catalog.Products
                 Items = data
             };
             return pagedResult;
+        }
+
+        public async Task<List<ProductViewModel>> GetAll()
+        {
+            var query = from p in _context.Products
+                        join pt in _context.ProductTranslations on p.Id equals pt.ProductId
+                        join pic in _context.ProductInCategories on p.Id equals pic.ProductId into ppic
+                        from pic in ppic.DefaultIfEmpty()
+                        join c in _context.Categories on pic.CategoryId equals c.Id
+
+                        select new { p, pt, pic };
+            var data = await query.Select(x => new ProductViewModel()
+               {
+                   Id = x.p.Id,
+                   Name = x.pt.Name,
+                   DateCreated = x.p.DateCreated,
+                   Description = x.pt.Description,
+                   Details = x.pt.Details,
+                   LanguageId = x.pt.LanguageId,
+                   OriginalPrice = x.p.OriginalPrice,
+                   Price = x.p.Price,
+                   SeoAlias = x.pt.SeoAlias,
+                   SeoDescription = x.pt.SeoDescription,
+                   SeoTitle = x.pt.SeoTitle,
+                   Stock = x.p.Stock,
+                   ViewCount = x.p.ViewCount,
+                    //ThumbnailImage = x.pi.ImagePath
+                }).ToListAsync();
+
+            return data;
         }
     }
 }
