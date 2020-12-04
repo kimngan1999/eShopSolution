@@ -34,9 +34,20 @@ namespace eShopSolution.AdminApp.Controllers
             _configuration = configuration;
            
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index(string keyword, int pageIndex = 1, int pageSize = 10)
         {
-            return View();
+            var sessions = HttpContext.Session.GetString("Token");
+            var request = new GetUserPagingRequest()
+            {
+                BearerToken = sessions,
+                Keyword = keyword,
+                PageIndex = pageIndex,
+                PageSize = pageIndex
+            };
+            var data = await _userApiClient.GetUsersPagings(request);
+
+
+            return View(data);
         }
 
         [HttpGet]
@@ -65,7 +76,7 @@ namespace eShopSolution.AdminApp.Controllers
                 IsPersistent = false
             };
             //HttpContext.Session.SetString(SystemConstants.AppSettings.DefaultLanguageId, _configuration[SystemConstants.AppSettings.DefaultLanguageId]);
-            //HttpContext.Session.SetString(SystemConstants.AppSettings.Token, result.ResultObj);
+            HttpContext.Session.SetString("Token", result);
             await HttpContext.SignInAsync(
                         CookieAuthenticationDefaults.AuthenticationScheme,
                         userPrincipal,
